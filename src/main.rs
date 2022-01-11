@@ -1,4 +1,5 @@
-use std::{collections::HashMap};
+use std::collections::HashMap;
+
 fn main() {
     println!("The first fibonacci number is: {}", nth_fibonacci(0));
     println!("The second fibonacci number is: {}", nth_fibonacci(1));
@@ -6,7 +7,10 @@ fn main() {
     println!("The fourth fibonacci number is: {}", nth_fibonacci(3));
     println!("The fifth fibonacci number is: {}", nth_fibonacci(4));
     println!("The sixth fibonacci number is: {}", nth_fibonacci(5));
-    println!("The sixth fibonacci number is: {}", nth_fibonacci(400))
+    println!(
+        "The fourhundredth fibonacci number is: {}",
+        nth_fibonacci(400)
+    )
 }
 
 fn nth_fibonacci(num: u32) -> u32 {
@@ -24,8 +28,24 @@ fn nth_fibonacci(num: u32) -> u32 {
             None => cache.insert(num, num),
         };
 
-        fib(num - 1, cache) + fib(num - 2, cache)
+        return fib(num - 1, cache) + fib(num - 2, cache);
     }
 
     fib(num, &mut cache)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn has_expect_outcomes() {
+        assert_eq!(0, nth_fibonacci(0));
+        assert_eq!(1, nth_fibonacci(1));
+        assert_eq!(1, nth_fibonacci(2));
+        assert_eq!(2, nth_fibonacci(3));
+        assert_eq!(4, nth_fibonacci(4));
+        assert_eq!(7, nth_fibonacci(5));
+        assert_eq!(79402, nth_fibonacci(400))
+    }
 }
